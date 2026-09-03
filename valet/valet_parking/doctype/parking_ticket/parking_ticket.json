@@ -28,7 +28,7 @@
    "fieldtype": "Link",
    "in_list_view": 1,
    "label": "Customer",
-   "options": "Valet Customer",
+   "options": "valet customer",
    "reqd": 1
   },
   {

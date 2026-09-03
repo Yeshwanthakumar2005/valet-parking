@@ -59,7 +59,7 @@ def update_status(ticket: str, status: str):
     whatsapp = None
 
     if status in ["On The Way", "Delivered"]:
-        customer = frappe.get_doc("Valet Customer", doc.customer)
+        customer = frappe.get_doc("valet customer", doc.customer)
 
         if customer.mobile_number:
             if status == "On The Way":

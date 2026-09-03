@@ -49,7 +49,7 @@ class ParkingTicket(Document):
     def after_insert(self):
         # Generate and attach a QR code containing the parking token.
         if self.parking_token and not self.qr_code:
-            ticket_url = f"{frappe.utils.get_url()}/desk/parking-ticket-view?ticket={self.parking_token}"
+            ticket_url = f"{frappe.utils.get_url()}/parking-ticket-view?ticket={self.parking_token}"
             qr = qrcode.make(ticket_url)
 
             buffer = io.BytesIO()
