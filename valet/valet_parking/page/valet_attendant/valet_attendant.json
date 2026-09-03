@@ -1,0 +1,7 @@
+{
+  "doctype": "Page",
+  "name": "valet-attendant",
+  "title": "Valet Attendant",
+  "module": "valet parking",
+  "standard": "Yes"
+}

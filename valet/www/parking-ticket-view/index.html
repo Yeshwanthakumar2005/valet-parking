@@ -1,0 +1,120 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div class="container" style="max-width: 600px; margin: 40px auto; padding: 20px;">
+    <div class="card p-4">
+        <h2 class="text-center mb-4">Parking Ticket</h2>
+
+        <div id="ticket-content">
+            <p class="text-muted text-center">Loading ticket...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+const ticket = new URLSearchParams(window.location.search).get("ticket");
+
+function loadTicket() {
+    if (!ticket) {
+        document.getElementById("ticket-content").innerHTML =
+            '<div class="alert alert-danger">Parking ticket number is missing.</div>';
+        return;
+    }
+
+    fetch(
+        "/api/method/valet.valet_parking.page.parking_ticket_view.parking_ticket_view.get_ticket"
+        + "?ticket=" + encodeURIComponent(ticket)
+    )
+    .then(response => response.json())
+    .then(data => {
+        if (!data.message) {
+            throw new Error("Ticket not found");
+        }
+
+        const t = data.message;
+
+        document.getElementById("ticket-content").innerHTML = `
+            <div class="mb-3">
+                <strong>Parking Token</strong>
+                <div>${t.parking_token || ""}</div>
+            </div>
+
+            <div class="mb-3">
+                <strong>Vehicle Number</strong>
+                <div>${t.vehicle_number || ""}</div>
+            </div>
+
+            <div class="mb-3">
+                <strong>Vehicle Type</strong>
+                <div>${t.vehicle_type || ""}</div>
+            </div>
+
+            <div class="mb-3">
+                <strong>Status</strong>
+                <div>${t.status || ""}</div>
+            </div>
+
+            <div class="mb-3">
+                <strong>Check In</strong>
+                <div>${t.check_in_time || ""}</div>
+            </div>
+
+            ${
+                t.status === "Parked"
+                    ? `
+                        <button
+                            id="request-vehicle"
+                            class="btn btn-primary w-100 mt-3">
+                            Request My Vehicle
+                        </button>
+                      `
+                    : ""
+            }
+        `;
+
+        const button = document.getElementById("request-vehicle");
+
+        if (button) {
+            button.addEventListener("click", requestVehicle);
+        }
+    })
+    .catch(() => {
+        document.getElementById("ticket-content").innerHTML =
+            '<div class="alert alert-danger">Parking ticket could not be found.</div>';
+    });
+}
+
+function requestVehicle() {
+    const button = document.getElementById("request-vehicle");
+
+    button.disabled = true;
+    button.innerText = "Requesting...";
+
+    fetch(
+        "/api/method/valet.valet_parking.page.parking_ticket_view.parking_ticket_view.request_vehicle",
+        {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: "ticket=" + encodeURIComponent(ticket)
+        }
+    )
+    .then(response => response.json())
+    .then(data => {
+        if (!data.message || !data.message.success) {
+            throw new Error("Request failed");
+        }
+
+        loadTicket();
+    })
+    .catch(() => {
+        button.disabled = false;
+        button.innerText = "Request My Vehicle";
+        alert("Could not request the vehicle.");
+    });
+}
+
+loadTicket();
+</script>
+{% endblock %}

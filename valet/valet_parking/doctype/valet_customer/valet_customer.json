@@ -1,0 +1,81 @@
+{
+ "actions": [],
+ "allow_bulk_edit": 1,
+ "allow_rename": 1,
+ "creation": "2026-08-31 14:05:50.734168",
+ "doctype": "DocType",
+ "engine": "InnoDB",
+ "field_order": [
+  "customer_name",
+  "mobile_number",
+  "vehicle_type",
+  "vehicle_number",
+  "status"
+ ],
+ "fields": [
+  {
+   "fieldname": "vehicle_type",
+   "fieldtype": "Select",
+   "in_list_view": 1,
+   "label": "Vehicle Type",
+   "options": "car\nbike\nscooter\nother",
+   "reqd": 1
+  },
+  {
+   "fieldname": "vehicle_number",
+   "fieldtype": "Data",
+   "label": "Vehicle Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Awaiting Parking\nParked\nRetrieval requested\nOn the Way\nDelivered",
+   "reqd": 1
+  },
+  {
+   "fieldname": "mobile_number",
+   "fieldtype": "Phone",
+   "in_list_view": 1,
+   "label": "Mobile Number",
+   "reqd": 1
+  },
+  {
+   "fieldname": "customer_name",
+   "fieldtype": "Data",
+   "in_list_view": 1,
+   "label": "Customer Name",
+   "reqd": 1
+  }
+ ],
+ "grid_page_length": 50,
+ "index_web_pages_for_search": 1,
+ "links": [],
+ "modified": "2026-08-31 17:23:14.418614",
+ "modified_by": "Administrator",
+ "module": "valet parking",
+ "name": "valet customer",
+ "owner": "Administrator",
+ "permissions": [
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "System Manager",
+   "share": 1,
+   "write": 1
+  }
+ ],
+ "row_format": "Dynamic",
+ "rows_threshold_for_grid_search": 20,
+ "show_title_field_in_link": 1,
+ "sort_field": "creation",
+ "sort_order": "DESC",
+ "states": [],
+ "title_field": "customer_name"
+}

@@ -1,0 +1,7 @@
+{
+  "doctype": "Page",
+  "name": "parking-ticket-view",
+  "module": "valet parking",
+  "standard": "Yes",
+  "title": "Parking Ticket"
+}
