@@ -1,33 +1,47 @@
-### valet parking
+# Valet Parking Management System
 
-whatsapp valet management system
+A Frappe-based valet parking management system that manages customers, parking tickets, QR-based vehicle retrieval requests, and valet attendant workflows.
 
-### Installation
+## Project Overview
 
-You can install this app using the [bench](https://github.com/frappe/bench) CLI:
+The system digitizes the valet parking process from vehicle check-in to vehicle delivery.
 
-```bash
-cd $PATH_TO_YOUR_BENCH
-bench get-app $URL_OF_THIS_REPO --branch develop
-bench install-app valet
-```
+## Main Workflow
 
-### Contributing
+Customer
+→ Parking Ticket
+→ Parking Token + QR Code
+→ Customer scans QR
+→ Request My Vehicle
+→ Retrieval Requested
+→ Valet Attendant
+→ On The Way
+→ Delivered
 
-This app uses `pre-commit` for code formatting and linting. Please [install pre-commit](https://pre-commit.com/#installation) and enable it for this repository:
+## Features
 
-```bash
-cd apps/valet
-pre-commit install
-```
+- Customer management
+- Vehicle details management
+- Parking ticket creation
+- Automatic parking token generation
+- Check-in and check-out time tracking
+- QR code generation
+- Mobile QR scanning
+- Public customer ticket page
+- Request My Vehicle functionality
+- Retrieval request tracking
+- Valet attendant dashboard
+- Vehicle status management
 
-Pre-commit is configured to use the following tools for checking and formatting your code:
+### Ticket Status Flow
 
-- ruff
-- eslint
-- prettier
-- pyupgrade
-
-### License
-
-mit
+```text
+Awaiting Parking
+       ↓
+Parked
+       ↓
+Retrieval Requested
+       ↓
+On The Way
+       ↓
+Delivered
