@@ -95,7 +95,8 @@ function requestVehicle() {
         {
             method: "POST",
             headers: {
-                "Content-Type": "application/x-www-form-urlencoded"
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-Frappe-CSRF-Token": frappe.csrf_token
             },
             body: "ticket=" + encodeURIComponent(ticket)
         }
